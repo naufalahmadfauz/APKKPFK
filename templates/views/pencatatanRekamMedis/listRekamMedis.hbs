@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>APKKPFK &mdash; Klinik Pratama Fitrah Keluarga</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Libraries -->
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+
+<body class="sidebar-mini">
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        {{> navbar}}
+        {{>sidebarDokter}}
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>List Rekam Medis Pasien</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Data Rekam Medis</h4>
+                            </div>
+                            
+<!--                            ini search sama filter-->
+<!--                            =================================-->
+                            <form class="col-6">
+                                <div class="input-group">
+                                    <input id="cari_rekam_medis" type="text" class="form-control"
+                                           placeholder="Cari Rekam Medis">
+                                    <div class="input-group-btn">
+                                        <a href="#" id="cari_rekam_medis_button" class="btn btn-primary"><i
+                                                class="fas fa-search"></i></a>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--                            ini search sama filter-->
+                            <!--                            =================================-->
+                            <br>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>ID Rekam Medis</th>
+                                            <th>ID Registrasi Pasien</th>
+                                            <th>Nama Pasien</th>
+                                            <th>NIK</th>
+                                            
+                                            <th>Aksi</th>
+                                        </tr>
+                                        {{#rekamMedis}}
+                                            <tr>
+                                                <td>{{id_rekam_medis}}</td>
+                                                <td>{{id_registrasi_pasien}}</td>
+                                                <td>{{dataPasien.nama_lengkap}}</td>
+                                                <td>{{dataPasien.nik}}</td>
+                                                <td><a href="/dokter/rekam_medis/detail/{{id_rekam_medis}}" class="btn btn-primary">Detail</a></td>
+                                            </tr>
+                                        {{/rekamMedis}}
+                                    </table>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="card-footer text-right">
+                                <nav class="d-inline-block">
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item">
+                                            <a class="page-link" href="/dokter/list_rekam_medis/?offset={{prevOffset}}&limit={{limit}}" tabindex="-1"><i class="fas fa-chevron-left"></i> Sebelumnya</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/dokter/list_rekam_medis/?offset={{nextOffset}}&limit={{limit}}">Selanjutnya <i class="fas fa-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-body">
+                </div>
+            </section>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    //untuk filter search dan jkn
+    document.getElementById('cari_rekam_medis_button').addEventListener('click', function () {
+        let cari_rekam_medis = document.getElementById('cari_rekam_medis').value;
+        
+        if (cari_rekam_medis === '') {
+            window.location.href = '/dokter/list_rekam_medis';
+        } else {
+            window.location.href = '/dokter/list_rekam_medis/?limit=100&search='+ cari_rekam_medis;
+        }
+    });
+</script>
+<!-- General JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/custom.js"></script>
+
+<!-- Page Specific JS File -->
+</body>
+</html>

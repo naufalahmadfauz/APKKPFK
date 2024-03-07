@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Aplikasi pelayanan kesehatan klinik pratama fitrah keluarga</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!-- CSS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" href="/modules/select2/dist/css/select2.min.css">-->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+</head>
+
+
+<body class="sidebar-mini">
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+        </nav>
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Pengadaan Obat JKN</h1>
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Lengkapi Pengadaan Obat</h4></div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>ID Pengadaan Obat</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{pengadaan.id_pengadaan_obat}} </strong></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Status Pengadaan Obat</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{pengadaan.status_pengadaan_obat}} </strong></p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Jenis Pengadaan Obat</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{pengadaan.jenis_pengadaan_obat}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Nomer Seri Faktur Pajak</label>
+                                            <input required id="nomer_seri_faktur_pajak" type="number"
+                                                   class="form-control" name="nomer_seri_faktur_pajak">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>NPWP</label>
+                                            <input required id="npwp_pt_penjual" type="text" class="form-control"
+                                                   name="npwp_pt_penjual">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Nama PT Penjual</label>
+                                            <input required id="nama_pt_penjual" type="text" class="form-control"
+                                                   name="nama_pt_penjual">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Alamat PT Penjual</label>
+                                            <input required id="alamat_pt_penjual" type="text" class="form-control"
+                                                   name="alamat_pt_penjual">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>PPn</label>
+                                            <input required id="ppn" type="number" class="form-control" name="ppn">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Total</label>
+                                            <input required id="total_pajak" type="number" class="form-control"
+                                                   name="total_pajak">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Lengkapi Pengadaan Obat</h4></div>
+                                <div class="card-body">
+                                    <form>
+                                        {{#each detailPengadaan}}
+                                            <div id="detail_pengadaan_obat" class="row">
+                                                <input hidden="hidden" id="id_obat" type="text" name="id_obat" value="{{id_obat}}">
+                                                <input hidden="hidden" id="satuan" type="text" name="satuan" value="{{satuan}}">
+                                                <input hidden="hidden" id="jumlah" type="text" name="jumlah" value="{{jumlah}}">
+                                                
+                                                <div class="form-group col-3">
+                                                    <label>Nama Obat</label>
+                                                    <p class="text-dark bold"><strong> {{dataObat.nama_obat}} </strong>
+                                                    </p>
+                                                </div>
+
+                                                <div class="form-group col-3">
+                                                    <label>Nomer Batch</label>
+                                                    <input required id="nomer_batch" type="text" class="form-control"
+                                                           name="nomer_batch">
+                                                </div>
+
+                                                <div class="form-group col-2">
+                                                    <label>Expire</label>
+                                                    <input required id="expire" type="date" class="form-control"
+                                                           name="expire">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <label>Harga Satuan</label>
+                                                    <input required id="harga_satuan" type="number" class="form-control"
+                                                           name="harga_satuan">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <label>Harga Jual Satuan</label>
+                                                    <input readonly required id="harga_jual_satuan" type="number"
+                                                           class="form-control" name="harga_jual_satuan">
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </form>
+
+                                    <div class="form-group">
+                                        <a id="simpan_pengadaan_obat" href="#" class="btn btn-primary"> Simpan Pengadaan
+                                            Obat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    
+    
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const kirim = document.getElementById('simpan_pengadaan_obat')
+        kirim.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let nomer_seri_faktur_pajak = document.getElementById('nomer_seri_faktur_pajak').value
+            let nama_pt_penjual = document.getElementById('nama_pt_penjual').value
+            let alamat_pt_penjual = document.getElementById('alamat_pt_penjual').value
+            let npwp_pt_penjual= document.getElementById('npwp_pt_penjual').value
+            let ppn = document.getElementById('ppn').value
+            let total_pajak = document.getElementById('total_pajak').value
+            
+
+            const detailPengadaanObatDivs = document.querySelectorAll('#detail_pengadaan_obat');
+
+            // Construct the terapi array
+            let pengadaanObat = Array.from(detailPengadaanObatDivs).map(div => {
+                return {
+                    id_obat: div.querySelector('#id_obat').value,
+                    nomer_batch: div.querySelector('#nomer_batch').value,
+                    expire: div.querySelector('#expire').value,
+                    harga_satuan: div.querySelector('#harga_satuan').value,
+                    jumlah: div.querySelector('#jumlah').value,
+                    satuan: div.querySelector('#satuan').value,
+                    harga_jual_satuan: ''
+                    // harga_jual_satuan: div.querySelector('#harga_satuan').value
+                };
+            });
+
+            pengadaanObat = pengadaanObat.map(item => {
+                let expireDate = new Date(item.expire);
+                item.expire = moment(expireDate).format("YYYY-MM-DD HH:mm:ss.SSSSSS Z");
+                item.harga_jual_satuan = item.harga_satuan
+                return item;
+            });
+
+            for (let i = 0; i < pengadaanObat.length; i++) {
+                if (!pengadaanObat[i].nomer_batch || !pengadaanObat[i].expire || !pengadaanObat[i].harga_satuan || !pengadaanObat[i].harga_jual_satuan) {
+                    // Display an alert and stop the form submission
+                    swal('Error', 'Tolong lengkapi pengadaan obat!', 'error');
+                    event.preventDefault();
+                    return;
+                }
+            }
+            let data = {
+                jenis_pengadaan_obat: 'JKN',
+                detailPengadaanObat: pengadaanObat,
+                nomer_seri_faktur_pajak,
+                nama_pt_penjual,
+                alamat_pt_penjual,
+                npwp_pt_penjual,
+                ppn,
+                total_pajak
+            }
+            console.log(data)
+            fetch('/apoteker/pengadaan_obat/{{pengadaan.id_pengadaan_obat}}', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                credentials: 'include' // Include cookies
+            })
+                    .then(response => {
+                        if (response.status === 400) {
+                            swal('Gagal', 'Bukan array!', 'error');
+                            return;
+                        } else {
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
+                        swal('Berhasil', 'Pengadaan Obat Berhasil Disimpan! ', 'success');
+                        // setTimeout(() => {
+                        //     window.location.href = '/apoteker/list_pengadaan_obat';
+                        // }, 5000);
+                    })
+                    .catch(error => {
+                        swal('Gagal', 'Kendala Server', 'error');
+                        console.error('Error:', error);
+                    });
+
+
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+<!-- JS Libraies -->
+<!--<script src="/assets/modules/cleave.js/dist/addons/cleave-phone.us.js"></script>-->
+<!--<script src="/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>-->
+<!--<script src="/modules/select2/dist/js/select2.full.min.js"></script>-->
+<script src="/assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/custom.js"></script>
+<!--<script src="/assets/js/page/forms-advanced-forms.js"></script>-->
+
+<!-- Page Specific JS File -->
+</body>
+</html>

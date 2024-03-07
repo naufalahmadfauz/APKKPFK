@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Aplikasi pelayanan kesehatan klinik pratama fitrah keluarga</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Libraries -->
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+
+<body class="sidebar-mini">
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+        </nav>
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Detail Pendaftar Pasien Baru</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                        <div class="card card-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>Nama Pasien</label>
+                                        <p class="text-dark bold"><strong> {{pasien.nama_lengkap}} </strong></p>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="last_name">NIK</label>
+                                        <p class="text-dark bold"><strong> {{pasien.nik}} </strong></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="first_name">Tanggal Lahir</label>
+                                        <p class="text-dark bold"><strong> {{tglLahirFormat}} </strong></p>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>ID Registrasi Pasien</label>
+                                        <p class="text-dark bold"><strong> {{pasien.id_registrasi_pasien}} </strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="first_name">Alamat Pasien</label>
+                                        <p class="text-dark bold"><strong> {{pasien.alamat}} </strong></p>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="last_name">Jenis Kelamin</label>
+                                        <p class="text-dark bold"><strong> {{pasien.jenis_kelamin}} </strong></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="last_name">Pasien JKN</label>
+                                        <p class="text-dark bold"><strong> {{pasien.pasien_jkn}}</strong></p>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Foto Identitas</label>
+                                        <a target="_blank" class="btn btn-primary" href="/storage/picture/{{pasien.foto_ktp}}">Lihat</a>
+                                    </div>
+                                </div>
+                                
+                                
+                                {{#if dataJkn}}
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Nomer Kartu</label>
+                                            <p class="text-dark bold"><strong> {{dataJkn.nomer_kartu}}</strong></p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Faskes Tingkat</label>
+                                            <p class="text-dark bold"><strong> {{dataJkn.faskes_tingkat}}</strong></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Foto Kartu JKN</label>
+                                            <a target="_blank" class="btn btn-primary" href="/storage/picture/{{dataJkn.foto_kartu_jkn}}">Lihat</a>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                                
+                            </div>
+                            <a id="setujui" href="#" class="col-12 btn btn-success text-white "> S E T U J U I </a>
+                            <br>
+                            <a id="tolak" href="#" class="col-12 btn btn-danger text-white "> T O L A K </a>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+    document.getElementById('setujui').addEventListener('click', function (e) {
+        e.preventDefault();
+        fetch('/admin/setujui_pasien/{{pasien.id_registrasi_pasien}}', {
+            method: 'PATCH',
+            credentials: 'include' // Include cookies
+        }).then(response => {
+            if (response.status === 500) {
+                swal('Error', 'Kendala Server', 'error');
+            }else {
+                swal('Berhasil', 'Pendaftaran berhasil disetujui', 'success');
+                return response.json()
+            }
+        }).then(data => {
+            swal('Berhasil', 'Pendaftaran berhasil disetujui', 'success');
+            setTimeout(() => {
+                window.location.href = '/admin/pendaftar_daring_baru'
+            }, 1000);
+        }).catch(error => console.error('Error:', error));
+    });
+    
+    document.getElementById('tolak').addEventListener('click', function (e) {
+        e.preventDefault();
+        fetch('/admin/tolak_pasien/{{pasien.id_registrasi_pasien}}', {
+            method: 'DELETE',
+            credentials: 'include' // Include cookies
+        }).then(response => {
+            if (response.status === 500) {
+                swal('Error', 'Kendala Server', 'error');
+            }else {
+                swal('Berhasil', 'Pendaftaran berhasil disetujui', 'success');
+                return response.json()
+            }
+        }).then(data => {
+            swal('Berhasil', 'Pendaftaran berhasil ditolak', 'success');
+            setTimeout(() => {
+                window.location.href = '/admin/pendaftar_daring_baru'
+            }, 1000);
+        }).catch(error => console.error('Error:', error));
+    });
+</script>
+<!-- JS Libraies -->
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/custom.js"></script>
+
+<!-- Page Specific JS File -->
+</body>
+</html>

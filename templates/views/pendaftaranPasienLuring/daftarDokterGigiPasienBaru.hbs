@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Aplikasi pelayanan kesehatan klinik pratama fitrah keluarga</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Libraries -->
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+
+<body class="sidebar-mini">
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            
+        </nav>
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Silahkan Masukkan NIK Atau Nomer Registrasi Pasien</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                        <div class="card card-primary">
+                            <div class="card-header"><h4>Daftar Sebagai Pasien Baru</h4></div>
+                            <div class="card-body">
+                                <form id="form_daftar_pasien_baru" method="POST" action="/daftar/pasien_baru">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Nama Lengkap</label>
+                                            <input required id="nama_lengkap" type="text" class="form-control"
+                                                   name="nama_lengkap"
+                                                   autofocus>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Tanggal Lahir</label>
+                                            <input id="tanggal_lahir" type="date" class="form-control"
+                                                   name="tanggal_lahir">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Nomer Induk Kependudukan</label>
+                                            <input required id="nik" type="number" class="form-control" name="nik"
+                                                   autofocus>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Alamat</label>
+                                            <input required id="alamat" type="text" class="form-control" name="alamat">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Jenis Kelamin</label>
+                                            <select id="jenis_kelamin" name="jenis_kelamin"
+                                                    class="form-control selectric">
+                                                <option value="Laki-Laki">Laki-Laki</option>
+                                                <option value="Perempuan">Perempuan</option>
+                                            </select>
+                                        </div>
+                                        <!--                                        <div class="form-group col-6">-->
+                                        <!--                                            <label>Foto KTP</label>-->
+                                        <!--                                            <input required id="foto_ktp" type="file" class="form-control"-->
+                                        <!--                                                   name="foto_ktp">-->
+                                        <!--                                        </div>-->
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Pasien JKN</label>
+                                            <select id="pasien_jkn" name="pasien_jkn" class="form-control selectric">
+                                                <option value="Tidak">Tidak</option>
+
+                                                <option value="Ya">Ya</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="data_jkn" class="form-divider">
+                                        Data JKN
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label>Faskes Tingkat</label>
+                                                <select id="faskes_tingkat" name="faskes_tingkat"
+                                                        class="form-control selectric">
+                                                    <option value="Tingkat 1">1</option>
+                                                    <option value="Tingkat 2">2</option>
+                                                    <option value="Tingkat 3">3</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label>Nomer Kartu</label>
+                                                <input id="nomer_kartu" type="number" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label>Foto JKN</label>
+                                                <input id="foto_jkn" type="file" class="form-control" name="foto_jkn">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                            Register
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="section-body">
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    //Ini menghilangkan form JKN kalau pasien jkn tidak secara default
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the select element
+        const selectElement = document.getElementById('pasien_jkn');
+        // Get the div element
+        const divElement = document.getElementById('data_jkn');
+        // Get the foto_jkn input element
+        const fotoJknInput = document.getElementById('foto_jkn');
+        // Initially hide the div
+        divElement.style.display = 'none';
+        // Remove the required attribute from the foto_jkn input
+        fotoJknInput.removeAttribute('required');
+        // Listen for changes on the select element
+        selectElement.addEventListener('change', function (event) {
+            // If the selected value is "Ya", show the div and make the foto_jkn input required
+            if (event.target.value === 'Ya') {
+                divElement.style.display = 'block';
+                fotoJknInput.setAttribute('required', '');
+            } else {
+                // Otherwise, hide the div and remove the required attribute from the foto_jkn input
+                divElement.style.display = 'none';
+                fotoJknInput.removeAttribute('required');
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+//Ini post fetch sama validasi
+        const form = document.getElementById('form_daftar_pasien_baru');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            //get element input
+            let nama_lengkap = document.getElementById('nama_lengkap');
+            let tanggal_lahir = document.getElementById('tanggal_lahir');
+            let nik = document.getElementById('nik');
+            let alamat = document.getElementById('alamat');
+            let jenis_kelamin = document.getElementById('jenis_kelamin');
+            let pasien_jkn = document.getElementById('pasien_jkn');
+            let faskes_tingkat = document.getElementById('faskes_tingkat');
+            let nomer_kartu = document.getElementById('nomer_kartu');
+
+            // Check if the fields are empty
+            if (!nama_lengkap.value) {
+                swal('Error', 'Tolong isi nama lengkap!', 'error');
+                return;
+            }
+            if (!tanggal_lahir.value) {
+                swal('Error', 'Tolong isi tanggal lahir!', 'error');
+                return;
+            }
+            if (!nik.value) {
+                swal('Error', 'Tolong isi NIK!', 'error');
+                return;
+            }
+            if (!alamat.value) {
+                swal('Error', 'Tolong isi alamat!', 'error');
+                return;
+            }
+            if (!jenis_kelamin.value) {
+                swal('Error', 'Tolong pilih jenis kelamin!', 'error');
+                return;
+            }
+            if (!pasien_jkn.value) {
+                swal('Error', 'Tolong pilih pasien JKN!', 'error');
+                return;
+            }
+            if (pasien_jkn.value === 'Ya') {
+                if (!faskes_tingkat.value) {
+                    swal('Error', 'Tolong isi faskes tingkat!', 'error');
+                    return;
+                }
+                if (!nomer_kartu.value) {
+                    swal('Error', 'Tolong isi nomer kartu!', 'error');
+                    return;
+                }
+            }
+
+            // Format the date to the 'DD-MM-YY' format
+            const originalDate = new Date(tanggal_lahir.value);
+            let day = originalDate.getDate().toString();
+            let month = (originalDate.getMonth() + 1).toString(); // Months are zero-based
+            let year = originalDate.getFullYear();
+            day = day.padStart(2, '0');
+            month = month.padStart(2, '0');
+            // Format the date to the 'DD-MM-YY' format
+            //fetch post
+
+            const formattedDate = `${day}-${month}-${year}`;
+            fetch('/daftar/pasien_baru/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nama_lengkap: nama_lengkap.value,
+                    tanggal_lahir: formattedDate,
+                    nik: nik.value,
+                    alamat: alamat.value,
+                    jenis_kelamin: jenis_kelamin.value,
+                    // foto_ktp: foto_ktp.value,
+                    pasien_jkn: pasien_jkn.value,
+                    faskes_tingkat: faskes_tingkat.value,
+                    nomer_kartu: nomer_kartu.value
+                }),
+                credentials: 'include' // Include cookies
+            })
+                    .then(response => {
+                        if (response.status === 409) {
+                            swal('Error', 'NIK sudah terdaftar, silahkan mendaftar sebagai pasien lama', 'error');
+                        } else if (response.status === 500) {
+                            swal('Error', 'Kendala server', 'error');
+                        } else if (response.status === 400) {
+                            swal('Error', 'Tolong isi tanggal lahir!', 'error');
+                        } else {
+                            swal('Berhasil', 'Pendaftaran berhasil', 'success');
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
+                        window.location.href = '/verifikasi/' + data.antrian.id_registrasi_pasien;
+                    })
+                    .catch(error => {
+                        // Handle the error
+                        console.error('Error:', error);
+                    });
+        });
+    });
+</script>
+<!-- JS Libraies -->
+<!--<script src="/assets/modules/cleave.js/dist/addons/cleave-phone.us.js"></script>-->
+<!--<script src="/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>-->
+<!--<script src="/assets/modules/select2/dist/js/select2.full.min.js"></script>-->
+<!--<script src="/assets/modules/selectric/public/jquery.selectric.min.js"></script>-->
+<script src="/assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="/assets/modules/cleave.js/dist/cleave.min.js"></script>
+<script src="/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/page/forms-advanced-forms.js"></script>
+
+<!-- Page Specific JS File -->
+</body>
+</html>

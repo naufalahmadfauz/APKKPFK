@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Aplikasi pelayanan kesehatan klinik pratama fitrah keluarga</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" href="/modules/select2/dist/css/select2.min.css">-->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+</head>
+
+
+<body class="sidebar-mini">
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+        </nav>
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Rekam Medis Pasien</h1>
+                </div>
+                <div class="section-body">
+                    <!--                        it should be here-->
+                    <div class="row">
+                        <!--                        ini rekam medis sekarang -->
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Buat Rekam Medis Baru</h4></div>
+                                <div class="card-body">
+                                    <form id="form_rekam_medis" method="POST"
+                                          action="/dokter/rekam_medis/{{rekamMedisAwal.id_rekam_medis_awal}}">
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label for="gejala">Gejala</label>
+                                                <textarea required id="gejala" class="form-control"
+                                                          name="gejala"></textarea>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label for="hasil_lab">Hasil Lab</label>
+                                                <input id="hasil_lab" type="text" class="form-control" name="hasil_lab">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="form-group">
+                                        <a id="simpan_rekam_medis" href="#" class="btn btn-primary"> Simpan Rekam
+                                            Medis</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        ini rekam medis awal-->
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Terapi</h4></div>
+                                <div class="card-body">
+                                    <div id="terapi" class="row">
+                                        <div class="form-group col-6">
+                                            <label for="pilihan_obat">Terapi</label>
+                                            <select id="id_stok_obat" name="id_stok_obat"
+                                                    class="form-control form-control-sm">
+                                                {{#each stokObat}}
+                                                    <option value="{{id_stok_obat}}">{{nama_obat}} [ {{tipe_obat}}
+                                                        ]
+                                                    </option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-2">
+                                            <label>Jumlah</label>
+                                            <input required id="jumlah" type="number" class="form-control"
+                                                   name="jumlah">
+                                        </div>
+
+                                        <div class="form-group col-4">
+                                            <label> Dosis </label>
+                                            <input required id="dosis" type="text" class="form-control"
+                                                   name="dosis">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <a id="tambah_obat_terapi" href="#" class="btn btn-primary"> Tambah Obat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Terapi Di Luar Klinik</h4></div>
+                                <div class="card-body">
+                                    <div id="terapi_luar_klinik" class="row">
+                                        <div class="form-group col-4">
+                                            <label>Terapi</label>
+                                            <input required id="nama_obat_terapi_luar" type="text" class="form-control"
+                                                   name="nama_obat_terapi_luar">
+                                        </div>
+
+                                        <div class="form-group col-2">
+                                            <label>Jumlah</label>
+                                            <input required id="jumlah_obat_terapi_luar" type="number"
+                                                   class="form-control"
+                                                   name="jumlah_obat_terapi_luar">
+                                        </div>
+                                        <div class="form-group col-2">
+                                            <label> Satuan </label>
+                                            <input required id="satuan_obat_terapi_luar" type="text"
+                                                   class="form-control"
+                                                   name="satuan_obat_terapi_luar">
+                                        </div>
+
+                                        <div class="form-group col-4">
+                                            <label> Dosis </label>
+                                            <input required id="dosis_obat_terapi_luar" type="text" class="form-control"
+                                                   name="dosis_obat_terapi_luar">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <a id="tambah_obat_terapi_luar" href="#" class="btn btn-primary"> Tambah
+                                            Obat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Rekam Medis Awal Pasien</h4></div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>ID Rekam Medis Awal</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{rekamMedisAwal.id_rekam_medis_awal}} </strong></p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">ID Registrasi Pasien</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{rekamMedisAwal.id_registrasi_pasien}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Usia</label>
+                                            <p class="text-dark bold"><strong> {{age}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Berat Badan</label>
+                                            <p class="text-dark bold"><strong> {{rekamMedisAwal.berat_badan}} </strong>
+                                            </p>
+
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Tinggi Badan</label>
+                                            <p class="text-dark bold"><strong> {{rekamMedisAwal.tinggi_badan}}</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Tekanan Darah Sistolik</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{rekamMedisAwal.tekanan_darah_sistolik}} </strong></p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Tekanan Darah Diastolik</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{rekamMedisAwal.tekanan_darah_diastolik}}</strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Suhu Badan</label>
+                                            <p class="text-dark bold"><strong> {{rekamMedisAwal.suhu_badan}} </strong>
+                                                °C</p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Riwayat Penyakit</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{rekamMedisAwal.riwayat_penyakit}}</strong></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--                            ini rekam medis terakhir-->
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card card-primary">
+                                <div class="card-header"><h4>Rekam Medis Terakhir</h4></div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>ID Rekam Medis</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{latestRekamMedis.id_rekam_medis}} </strong></p>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Nama Pasien</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{latestRekamMedis.dataPasien.nama_lengkap}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Jenis Kelamin</label>
+                                            <p class="text-dark bold">
+                                                <strong> {{latestRekamMedis.dataPasien.jenis_kelamin}} </strong></p>
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Usia</label>
+                                            <p class="text-dark bold"><strong> {{age}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="first_name">Hasil Lab</label>
+                                            <p class="text-dark bold"><strong> {{latestRekamMedis.hasil_lab}} </strong>
+                                            </p>
+
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Gejala</label>
+                                            <p class="text-dark bold"><strong> {{latestRekamMedis.gejala}}</strong></p>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="section-title">Terapi</div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Nama Obat</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Dosis</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {{#each terapiDetails}}
+                                                    <tr>
+                                                        <td>{{nama_obat}}</td>
+                                                        <td>{{total}}</td>
+                                                        <td>{{dosis}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    document.getElementById('tambah_obat_terapi').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent the default action of the <a> tag
+
+
+        // Get the div with id "terapi"
+        var terapiDiv = document.getElementById('terapi');
+
+        // Clone the div
+        var clonedDiv = terapiDiv.cloneNode(true);
+
+        // Append the cloned div to the parent element
+        terapiDiv.parentNode.appendChild(clonedDiv);
+    });
+
+    document.getElementById('tambah_obat_terapi_luar').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent the default action of the <a> tag
+
+
+        // Get the div with id "terapi"
+        var terapiLuarKlinikDiv = document.getElementById('terapi_luar_klinik');
+
+        // Clone the div
+        var clonedDiv = terapiLuarKlinikDiv.cloneNode(true);
+
+        // Append the cloned div to the parent element
+        terapiLuarKlinikDiv.parentNode.appendChild(clonedDiv);
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+//Ini post fetch sama validasi
+
+        const kirim = document.getElementById('simpan_rekam_medis')
+        kirim.addEventListener('click', function (event) {
+            event.preventDefault();
+
+
+            //get element input
+            let hasil_lab = document.getElementById('hasil_lab').value;
+            let gejala = document.getElementById('gejala').value;
+
+            // Check if the fields are empty
+            if (!hasil_lab) {
+                hasil_lab.value = '-'
+            }
+            if (!gejala) {
+                swal('Error', 'Tolong isi Gejala!', 'error');
+                return;
+            }
+            const terapiDivs = document.querySelectorAll('#terapi');
+            const terapiLuarKlinikDivs = document.querySelectorAll('#terapi_luar_klinik');
+
+            // Construct the terapi array
+            let terapi = Array.from(terapiDivs).map(div => {
+                
+                    
+                return {
+                    id_stok_obat: div.querySelector('#id_stok_obat').value,
+                    total: div.querySelector('#jumlah').value,
+                    dosis: div.querySelector('#dosis').value,
+                };
+            });
+
+            let terapiLuarKlinik = Array.from(terapiLuarKlinikDivs).map(div => {
+                let satuanDiv = ''
+                if (div.querySelector('#satuan_obat_terapi_luar')) {
+                    satuanDiv = div.querySelector('#satuan_obat_terapi_luar').value
+                }
+                return {
+                    id_stok_obat: null,
+                    nama_obat_terapi_luar: div.querySelector('#nama_obat_terapi_luar').value,
+                    total: div.querySelector('#jumlah_obat_terapi_luar').value,
+                    dosis: div.querySelector('#dosis_obat_terapi_luar').value,
+                    satuan_luar: satuanDiv
+                    
+                };
+            });
+
+            // Iterate over the terapi array
+            for (let i = 0; i < terapi.length; i++) {
+                if (!terapi[i].dosis || !terapi[i].total) {
+                    // Display an alert and stop the form submission
+                    swal('Error', 'Tolong isi jumlah dan dosis!!', 'error');
+
+                    event.preventDefault();
+                    return;
+                }
+            }
+
+            let data = {
+                gejala, hasil_lab
+            }
+            if (terapiLuarKlinik[0].dosis || terapiLuarKlinik[0].total) {
+                let mergedArray = [...terapi, ...terapiLuarKlinik]
+                let ids = terapi.map(t => t.id_stok_obat);
+                let hasDuplicates = ids.some((id, index) => ids.indexOf(id) !== index);
+                if (hasDuplicates) {
+                    swal('Error', 'Terdapat duplikat terapi!', 'error');
+                    return;
+                }
+
+                data.terapi = mergedArray
+
+
+            } else {
+                let ids = terapi.map(t => t.id_stok_obat);
+                let hasDuplicates = ids.some((id, index) => ids.indexOf(id) !== index);
+                if (hasDuplicates) {
+                    swal('Error', 'Terdapat duplikat terapi!', 'error');
+                    return;
+                }
+
+                data.terapi = terapi
+
+            }
+
+            fetch('/dokter/rekam_medis/{{rekamMedisAwal.id_rekam_medis_awal}}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                credentials: 'include' // Include cookies
+            })
+                    .then(response => {
+                        if (response.status !== 200) {
+                            swal('Gagal', 'Terdapat duplikat terapi!', 'error');
+                            return;
+                        } else {
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
+                        swal('Berhasil', 'Rekam Medis Berhasil Disimpan ', 'success');
+                        setTimeout(() => {
+                            window.location.href = `/dokter/rekam_medis/detail/${data.id_rekam_medis}`
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        swal('Gagal', 'Kendala Server', 'error');
+                        console.error('Error:', error);
+                    });
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<!--<script src="/assets/modules/cleave.js/dist/addons/cleave-phone.us.js"></script>-->
+<!--<script src="/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>-->
+<!--<script src="/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>-->
+<!--<script src="/modules/select2/dist/js/select2.full.min.js"></script>-->
+<script src="/assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="/assets/modules/cleave.js/dist/cleave.min.js"></script>
+<script src="/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/page/forms-advanced-forms.js"></script>
+
+<!-- Page Specific JS File -->
+</body>
+</html>
